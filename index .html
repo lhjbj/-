@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes,viewport-fit=cover">
+<meta name="theme-color" content="#0b1f3a">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="description" content="北京2035立体城市规划蓝图 — 向下生长，向上生活">
+<meta property="og:title" content="向下生长，向上生活 — 北京2035立体城市">
+<meta property="og:description" content="揭秘北京2035立体城市规划蓝图，深入地下50米的探秘之旅">
+<title>向下生长，向上生活 — 北京2035立体城市</title>
+<style>
+/* ========== RESET ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Microsoft YaHei",sans-serif;
+  color:#e8f1ff;background:#06101e;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;overflow-x:hidden;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ========== CSS VARS ========== */
+:root{
+  --blue-deep:#06101e;
+  --blue-dark:#0b1f3a;
+  --blue-mid:#0f3566;
+  --blue-accent:#1e88ff;
+  --blue-light:#4ab3ff;
+  --blue-glow:#63c6ff;
+  --gold:#ffc857;
+  --green:#2ecc71;
+  --cyan:#22d3ee;
+  --text-primary:#e8f1ff;
+  --text-muted:#8ba4c7;
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+
+/* ========== BACKGROUND ========== */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(1000px 500px at 50% -5%,rgba(30,136,255,.2),transparent 60%),
+    radial-gradient(600px 400px at 80% 85%,rgba(34,211,238,.1),transparent 70%),
+    linear-gradient(180deg,#06101e 0%,#071831 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 15% 25%,rgba(255,255,255,.5),transparent 50%),
+    radial-gradient(1px 1px at 65% 55%,rgba(255,255,255,.4),transparent 50%),
+    radial-gradient(1.2px 1.2px at 35% 75%,rgba(255,255,255,.3),transparent 50%),
+    radial-gradient(1px 1px at 85% 15%,rgba(255,255,255,.4),transparent 50%);
+  opacity:.6;
+}
+
+/* ========== CONTAINER ========== */
+.page-wrap{
+  max-width:480px;margin:0 auto;
+  padding:var(--safe-top) 0 var(--safe-bottom) 0;
+}
+
+/* ========== HERO SECTION ========== */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px 80px;
+  overflow:hidden;
+}
+.hero-logo{
+  font-size:11px;letter-spacing:6px;color:var(--text-muted);
+  margin-bottom:30px;text-transform:uppercase;
+}
+.hero-logo span{color:var(--blue-light)}
+.hero-title{
+  font-size:clamp(32px,8vw,48px);font-weight:900;line-height:1.15;
+  background:linear-gradient(135deg,#ffffff 20%,#63c6ff 80%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:18px;letter-spacing:-.5px;
+}
+.hero-sub{
+  font-size:clamp(14px,3.5vw,16px);color:var(--text-muted);
+  max-width:320px;margin:0 auto 40px;line-height:1.7;
+}
+
+/* Skyline */
+.skyline{
+  position:absolute;bottom:0;left:0;right:0;height:35vh;
+  background:linear-gradient(180deg,transparent 0%,rgba(30,136,255,.12) 40%,rgba(30,136,255,.3) 100%);
+  clip-path:polygon(
+    0% 100%,0% 80%,4% 78%,6% 50%,9% 50%,11% 78%,
+    14% 76%,16% 40%,19% 40%,21% 75%,
+    24% 74%,26% 30%,29% 30%,31% 73%,
+    34% 72%,36% 60%,39% 60%,41% 70%,
+    44% 69%,47% 15%,50% 15%,52% 5%,54% 15%,57% 15%,60% 68%,
+    63% 67%,66% 35%,69% 35%,71% 66%,
+    74% 65%,76% 25%,79% 25%,81% 64%,
+    84% 63%,86% 50%,89% 50%,91% 62%,
+    94% 61%,96% 45%,98% 45%,100% 60%,100% 100%
+  );
+  filter:drop-shadow(0 -4px 14px rgba(30,136,255,.3));
+}
+.skyline::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 60%,rgba(6,16,30,.85) 100%);
+}
+
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--blue-light);font-size:12px;
+  animation:hintBounce 2s ease-in-out infinite;
+}
+@keyframes hintBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.scroll-hint .arrow{
+  width:24px;height:24px;border:2px solid var(--blue-light);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:10px;
+  background:rgba(74,179,255,.1);
+}
+
+/* ========== SECTION COMMON ========== */
+.section{
+  padding:60px 20px 50px;position:relative;
+}
+.section-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:10px;letter-spacing:3px;color:var(--blue-light);
+  text-transform:uppercase;margin-bottom:12px;
+  padding:4px 10px;border:1px solid rgba(74,179,255,.3);
+  border-radius:999px;background:rgba(30,136,255,.08);
+}
+.section-label::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--blue-light);box-shadow:0 0 6px var(--blue-light);
+}
+.section-emoji{font-size:32px;margin-bottom:10px;filter:drop-shadow(0 0 10px rgba(74,179,255,.5))}
+.section-title{
+  font-size:clamp(24px,6vw,32px);font-weight:800;line-height:1.2;
+  background:linear-gradient(135deg,#fff 0%,var(--blue-glow) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  margin-bottom:10px;
+}
+.section-desc{
+  font-size:14px;color:var(--text-muted);line-height:1.7;
+  max-width:400px;margin-bottom:24px;
+}
+
+/* ========== GLASS CARD ========== */
+.card{
+  padding:20px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(15,53,102,.6) 0%,rgba(11,31,58,.5) 100%);
+  border:1px solid rgba(74,179,255,.2);
+  backdrop-filter:blur(12px);
+  box-shadow:0 6px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);
+  margin-bottom:12px;
+}
+.card h3{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.card p{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ========== P2 MAP SECTION ========== */
+.map-visual{
+  position:relative;width:100%;max-width:400px;
+  aspect-ratio:1/1;margin:16px auto;
+  background:radial-gradient(ellipse at 50% 50%,rgba(30,136,255,.12),transparent 70%);
+  border-radius:20px;overflow:hidden;
+}
+.map-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(74,179,255,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(74,179,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+  border-radius:20px;
+}
+.city-node{
+  position:absolute;transform:translate(-50%,-50%);
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+}
+.city-dot{
+  width:12px;height:12px;border-radius:50%;
+  background:var(--blue-light);
+  box-shadow:0 0 12px var(--blue-light);
+  animation:nodePulse 2s ease-in-out infinite;
+}
+@keyframes nodePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.city-name{
+  font-size:10px;color:#fff;font-weight:600;
+  padding:2px 7px;border-radius:999px;
+  background:rgba(11,31,58,.85);
+  border:1px solid rgba(74,179,255,.3);
+  white-space:nowrap;
+}
+.city-node.secondary .city-dot{width:8px;height:8px;background:rgba(74,179,255,.6)}
+.city-node.secondary .city-name{font-size:9px}
+
+.corridor-line{
+  position:absolute;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(74,179,255,.35),transparent);
+  transform-origin:0 50%;z-index:1;
+}
+.corridor-ring{
+  position:absolute;border:2px dashed rgba(74,179,255,.2);border-radius:50%;
+  animation:ringRotate 30s linear infinite;
+}
+@keyframes ringRotate{to{transform:rotate(360deg)}}
+
+/* knowledge items */
+.knowledge-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;
+}
+.kb-item{
+  padding:14px;border-radius:14px;
+  background:rgba(15,53,102,.45);
+  border:1px solid rgba(74,179,255,.18);
+  position:relative;overflow:hidden;
+}
+.kb-item::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--blue-light);
+}
+.kb-item .t{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.kb-item .d{font-size:11px;color:var(--text-muted);line-height:1.5}
+
+/* ========== P3 LAYERS SECTION ========== */
+.layer-list{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.layer-item{
+  padding:16px 18px;border-radius:16px;
+  display:flex;align-items:center;gap:14px;
+  border:1px solid rgba(255,255,255,.08);
+  transition:transform .2s ease;
+}
+.layer-item:active{transform:scale(.98)}
+.layer-item .depth{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  font-weight:800;font-size:15px;color:#fff;
+  background:rgba(6,16,30,.5);flex-shrink:0;
+}
+.layer-item .depth small{font-size:8px;font-weight:400;letter-spacing:1px;opacity:.8}
+.layer-item .info{flex:1;min-width:0}
+.layer-item .info h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.layer-item .info p{font-size:12px;color:var(--text-muted);line-height:1.4}
+
+.layer-item.L1{background:linear-gradient(135deg,rgba(74,179,255,.22) 0%,rgba(30,136,255,.12) 100%)}
+.layer-item.L2{background:linear-gradient(135deg,rgba(34,211,238,.2) 0%,rgba(14,165,233,.1) 100%)}
+.layer-item.L3{background:linear-gradient(135deg,rgba(99,102,241,.2) 0%,rgba(79,70,229,.1) 100%)}
+.layer-item.L4{background:linear-gradient(135deg,rgba(139,92,246,.2) 0%,rgba(124,58,237,.1) 100%)}
+
+.layer-detail{
+  padding:18px;border-radius:16px;
+  background:linear-gradient(135deg,rgba(15,53,102,.65) 0%,rgba(11,31,58,.55) 100%);
+  border:1px solid rgba(74,179,255,.22);
+}
+.layer-detail .title{font-size:13px;color:var(--blue-light);margin-bottom:6px;font-weight:700;letter-spacing:1px}
+.layer-detail .scene{font-size:18px;font-weight:800;color:#fff;margin-bottom:5px}
+.layer-detail .desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:10px}
+.layer-detail .tags{display:flex;flex-wrap:wrap;gap:6px}
+.layer-detail .tag{
+  padding:3px 9px;border-radius:999px;
+  font-size:10px;color:var(--blue-light);
+  background:rgba(74,179,255,.1);
+  border:1px solid rgba(74,179,255,.22);
+}
+
+/* ========== P4 SHIELD SECTION ========== */
+.gauge-wrap{
+  position:relative;width:100%;max-width:340px;
+  margin:20px auto;padding:22px;
+  border-radius:22px;
+  background:linear-gradient(135deg,rgba(15,53,102,.65) 0%,rgba(11,31,58,.55) 100%);
+  border:1px solid rgba(74,179,255,.22);
+}
+.gauge{
+  position:relative;width:200px;height:100px;margin:0 auto;
+  overflow:hidden;
+}
+.gauge-bg,.gauge-fill{
+  position:absolute;left:0;right:0;top:0;height:200px;
+  border-radius:50%;border:16px solid transparent;
+}
+.gauge-bg{border-color:rgba(74,179,255,.12);border-bottom-color:transparent;border-right-color:transparent;transform:rotate(225deg)}
+.gauge-fill{
+  border-color:transparent;
+  border-top-color:var(--blue-light);
+  border-left-color:var(--blue-light);
+  transform:rotate(225deg);
+  filter:drop-shadow(0 0 6px var(--blue-light));
+}
+.gauge-center{
+  position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  text-align:center;
+}
+.gauge-value{
+  font-size:36px;font-weight:900;color:#fff;
+  background:linear-gradient(135deg,#fff,#63c6ff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;line-height:1;
+}
+.gauge-unit{font-size:11px;color:var(--text-muted);letter-spacing:2px;margin-top:3px}
+.gauge-label{text-align:center;margin-top:10px;font-size:12px;color:var(--text-muted)}
+.gauge-status{
+  display:inline-flex;align-items:center;gap:5px;
+  margin-top:6px;padding:3px 10px;border-radius:999px;
+  background:rgba(46,204,113,.12);border:1px solid rgba(46,204,113,.35);
+  color:var(--green);font-size:11px;font-weight:600;
+}
+.gauge-status::before{
+  content:"";width:5px;height:5px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 6px var(--green);
+  animation:blink 1.5s ease-in-out infinite;
+}
+@keyframes blink{50%{opacity:.3}}
+
+.zone-cards{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px;
+}
+.zone{
+  padding:12px 8px;border-radius:14px;text-align:center;
+  border:1px solid rgba(255,255,255,.08);
+}
+.zone .zn{font-size:18px;margin-bottom:3px}
+.zone .zt{font-size:11px;font-weight:700;color:#fff;margin-bottom:2px}
+.zone .zd{font-size:9px;color:var(--text-muted);line-height:1.4}
+.zone.red{background:linear-gradient(135deg,rgba(255,82,82,.18),rgba(255,82,82,.06));border-color:rgba(255,82,82,.35)}
+.zone.yellow{background:linear-gradient(135deg,rgba(255,200,87,.18),rgba(255,200,87,.06));border-color:rgba(255,200,87,.35)}
+.zone.green{background:linear-gradient(135deg,rgba(46,204,113,.18),rgba(46,204,113,.06));border-color:rgba(46,204,113,.35)}
+
+/* ========== P5 FINALE SECTION ========== */
+.stats-row{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:20px 0;
+}
+.stat-item{
+  padding:16px 10px;border-radius:14px;text-align:center;
+  background:linear-gradient(135deg,rgba(15,53,102,.55) 0%,rgba(11,31,58,.45) 100%);
+  border:1px solid rgba(74,179,255,.2);
+}
+.stat-item .n{
+  font-size:24px;font-weight:800;color:#fff;
+  background:linear-gradient(135deg,#fff,#63c6ff);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1.2;
+}
+.stat-item .l{font-size:10px;color:var(--text-muted);letter-spacing:1px;margin-top:4px}
+
+.highlight-box{
+  padding:20px;border-radius:18px;text-align:center;
+  background:linear-gradient(135deg,rgba(30,136,255,.2) 0%,rgba(20,102,214,.1) 100%);
+  border:1px solid rgba(74,179,255,.3);
+  margin:20px 0;
+}
+.highlight-box .emoji{font-size:36px;margin-bottom:10px}
+.highlight-box .title{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px}
+.highlight-box .desc{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ========== FOOTER ========== */
+.footer{
+  padding:30px 20px 40px;text-align:center;
+  border-top:1px solid rgba(74,179,255,.1);
+  margin-top:20px;
+}
+.footer .source{
+  font-size:10px;color:var(--text-muted);line-height:1.5;
+  margin-bottom:8px;
+}
+.footer .brand{
+  font-size:11px;letter-spacing:2px;color:rgba(139,164,199,.5);
+}
+
+/* ========== DIVIDER ========== */
+.divider{
+  width:40px;height:2px;margin:10px 0 20px;
+  background:linear-gradient(90deg,var(--blue-light),transparent);
+  border-radius:1px;
+}
+
+/* ========== ANIMATION ON SCROLL ========== */
+.fade-in{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ========== BACK TO TOP ========== */
+.back-top{
+  position:fixed;right:14px;bottom:calc(20px + var(--safe-bottom));
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(30,136,255,.25);border:1px solid rgba(74,179,255,.35);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:14px;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+  z-index:50;
+}
+.back-top.show{opacity:1;pointer-events:auto}
+.back-top:active{transform:scale(.92)}
+
+/* ========== NAV PILLS ========== */
+.nav-pills{
+  position:fixed;top:calc(10px + var(--safe-top));left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;z-index:50;
+  padding:4px 8px;border-radius:999px;
+  background:rgba(6,16,30,.8);backdrop-filter:blur(10px);
+  border:1px solid rgba(74,179,255,.15);
+}
+.nav-pills a{
+  font-size:10px;padding:4px 10px;border-radius:999px;
+  color:var(--text-muted);white-space:nowrap;
+  transition:all .3s ease;
+}
+.nav-pills a.active{color:#fff;background:rgba(30,136,255,.3)}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:600px){
+  .page-wrap{max-width:520px}
+  .section{padding:70px 28px 60px}
+  .hero{padding:80px 32px 90px}
+}
+@media(min-width:900px){
+  .page-wrap{max-width:560px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV PILLS -->
+<nav class="nav-pills" id="navPills">
+  <a href="#hero" class="active">首页</a>
+  <a href="#map">格局</a>
+  <a href="#layers">生活</a>
+  <a href="#shield">安全</a>
+  <a href="#finale">未来</a>
+</nav>
+
+<!-- BACK TO TOP -->
+<div class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<div class="page-wrap">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-logo">北京 · <span>2035</span></div>
+    <h1 class="hero-title">向下生长<br>向上生活</h1>
+    <p class="hero-sub">揭秘北京 2035「立体城市」规划蓝图<br>一场深入地下 50 米的探秘之旅</p>
+    <div class="skyline"></div>
+    <div class="scroll-hint">
+      <div class="arrow">↓</div>
+      向下滑动
+    </div>
+  </section>
+
+  <!-- ===== P2 格局篇 ===== -->
+  <section class="section" id="map">
+    <div class="fade-in">
+      <div class="section-label">格局篇</div>
+      <div class="section-emoji">🗺️</div>
+      <h2 class="section-title">七廊两环<br>筑牢首都安全底座</h2>
+      <div class="divider"></div>
+      <p class="section-desc">地下空间不仅是发展资源，更是京津冀协同的安全防护空间。七大廊道与两环网络，保障水、油、气等战略资源跨区域稳定供应。</p>
+    </div>
+
+    <!-- Map Visual -->
+    <div class="map-visual fade-in">
+      <div class="map-grid"></div>
+      <!-- City Nodes -->
+      <div class="city-node" style="left:28%;top:32%">
+        <div class="city-dot"></div><div class="city-name">北京</div>
+      </div>
+      <div class="city-node" style="left:68%;top:52%">
+        <div class="city-dot"></div><div class="city-name">天津</div>
+      </div>
+      <div class="city-node" style="left:42%;top:68%">
+        <div class="city-dot"></div><div class="city-name">雄安</div>
+      </div>
+      <div class="city-node secondary" style="left:18%;top:58%">
+        <div class="city-dot"></div><div class="city-name">保定</div>
+      </div>
+      <div class="city-node secondary" style="left:78%;top:28%">
+        <div class="city-dot"></div><div class="city-name">唐山</div>
+      </div>
+      <div class="city-node secondary" style="left:55%;top:38%">
+        <div class="city-dot"></div><div class="city-name">廊坊</div>
+      </div>
+      <!-- Corridor Lines -->
+      <div class="corridor-line" style="left:28%;top:32%;width:200px;transform:rotate(18deg)"></div>
+      <div class="corridor-line" style="left:28%;top:32%;width:250px;transform:rotate(45deg)"></div>
+      <div class="corridor-line" style="left:42%;top:68%;width:180px;transform:rotate(-25deg)"></div>
+      <div class="corridor-line" style="left:55%;top:38%;width:140px;transform:rotate(20deg)"></div>
+      <!-- Ring -->
+      <div class="corridor-ring" style="left:25%;top:25%;width:50%;height:50%;"></div>
+    </div>
+
+    <div class="knowledge-grid fade-in">
+      <div class="kb-item">
+        <div class="t">七廊</div>
+        <div class="d">保障水、油、气等战略资源跨区域供应</div>
+      </div>
+      <div class="kb-item">
+        <div class="t">两环</div>
+        <div class="d">地下能源供应成环 + 地下输水工程成环</div>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-top:14px">
+      <h3>🔗 京津冀协同</h3>
+      <p>地下空间规划首次实现京津冀三省市统筹布局，打破行政区划壁垒，让资源流通更高效、城市运行更具韧性。</p>
+    </div>
+  </section>
+
+  <!-- ===== P3 生活篇 ===== -->
+  <section class="section" id="layers">
+    <div class="fade-in">
+      <div class="section-label">生活篇</div>
+      <div class="section-emoji">🏙️</div>
+      <h2 class="section-title">向地下要空间<br>把地面还给生活</h2>
+      <div class="divider"></div>
+      <p class="section-desc">统筹「四层」地下空间，补齐民生短板。从便民商业到战略储备，每一层都承载着城市生活的不同侧面。</p>
+    </div>
+
+    <div class="layer-list fade-in">
+      <div class="layer-item L1">
+        <div class="depth">0<small>-10m</small></div>
+        <div class="info"><h4>浅层</h4><p>便民商业 · 下沉广场 · 地铁接驳</p></div>
+      </div>
+      <div class="layer-item L2">
+        <div class="depth">10<small>-30m</small></div>
+        <div class="info"><h4>次浅层</h4><p>公共停车场 · 综合管廊</p></div>
+      </div>
+      <div class="layer-item L3">
+        <div class="depth">30<small>-50m</small></div>
+        <div class="info"><h4>次深层</h4><p>深层调蓄隧洞 · 大型储水工程</p></div>
+      </div>
+      <div class="layer-item L4">
+        <div class="depth">50<small>m+</small></div>
+        <div class="info"><h4>深层</h4><p>战略资源储备 · 重要基础设施</p></div>
+      </div>
+    </div>
+
+    <div class="layer-detail fade-in">
+      <div class="title">浅层 · 0-10m</div>
+      <div class="scene">告别「城市拉链」</div>
+      <div class="desc">逛街、换乘不用日晒雨淋。商业、下沉广场与地铁无缝衔接，让地面回归行人和绿地。核心区「用地下换地上」，停车不再一位难求。</div>
+      <div class="tags">
+        <span class="tag">🛍️ 地下商业</span>
+        <span class="tag">🚇 地铁接驳</span>
+        <span class="tag">🌳 下沉广场</span>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-top:14px">
+      <h3>🅿️ 次浅层亮点：停车不再难</h3>
+      <p>「学医景商」核心区停车难题，通过地下 10-30 米公共停车场解决。综合管廊集中收纳城市管线，告别反复开挖的「马路拉链」。</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🌊 次深层亮点：主动调蓄</h3>
+      <p>深层调蓄隧洞与大型储水工程，让城市防汛从「被动应急」变为「主动调蓄」，有效应对暴雨内涝。</p>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🔮 深层：为未来预留</h3>
+      <p>50 米以下以战略资源储备和重要基础设施为主，为城市的未来预留充足的战略空间。</p>
+    </div>
+  </section>
+
+  <!-- ===== P4 安全篇 ===== -->
+  <section class="section" id="shield">
+    <div class="fade-in">
+      <div class="section-label">安全篇</div>
+      <div class="section-emoji">🛡️</div>
+      <h2 class="section-title">安全第一<br>智慧守护</h2>
+      <div class="divider"></div>
+      <p class="section-desc">建立地下水位动态监测网络，三类安全分区精准管控，防范渗水涌水风险，让城市运行更安心。</p>
+    </div>
+
+    <div class="gauge-wrap fade-in">
+      <div class="gauge">
+        <div class="gauge-bg"></div>
+        <div class="gauge-fill"></div>
+        <div class="gauge-center">
+          <div class="gauge-value">1,248</div>
+          <div class="gauge-unit">监测点 · 实时</div>
+        </div>
+      </div>
+      <div class="gauge-label">地下水位动态监测网络</div>
+      <div style="text-align:center"><div class="gauge-status">系统运行正常</div></div>
+
+      <div class="zone-cards">
+        <div class="zone red"><div class="zn">🚫</div><div class="zt">禁止建设区</div><div class="zd">高风险地质<br>严格保护</div></div>
+        <div class="zone yellow"><div class="zn">⚠️</div><div class="zt">有条件区</div><div class="zd">评估后<br>有序开发</div></div>
+        <div class="zone green"><div class="zn">✅</div><div class="zt">适宜建设区</div><div class="zd">鼓励立体<br>开发利用</div></div>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-top:14px">
+      <h3>🛟 平急两用 · 综合防灾</h3>
+      <p>统筹人防工程与应急避难场所，提升巨灾应对能力。地下空间成为城市安全的隐形盾牌，平时服务民生、急时守护生命。</p>
+    </div>
+  </section>
+
+  <!-- ===== P5 未来之城 ===== -->
+  <section class="section" id="finale">
+    <div class="fade-in">
+      <div class="section-label">2035 未来之城</div>
+      <div class="section-emoji">🎉</div>
+      <h2 class="section-title">遇见多维、安全<br>高效的北京</h2>
+      <div class="divider"></div>
+      <p class="section-desc">到 2035 年，北京将建成全球立体城市典范，地下空间成为城市高质量发展的新引擎。</p>
+    </div>
+
+    <div class="stats-row fade-in">
+      <div class="stat-item"><div class="n">17.4㎡</div><div class="l">人均地下空间</div></div>
+      <div class="stat-item"><div class="n">4 层</div><div class="l">立体统筹</div></div>
+      <div class="stat-item"><div class="n">7+2</div><div class="l">廊环成网</div></div>
+    </div>
+
+    <div class="highlight-box fade-in">
+      <div class="emoji">🏙️</div>
+      <div class="title">向下生长，向上生活</div>
+      <div class="desc">地下空间不是城市的附属品，而是高质量发展的新引擎。从七廊两环的安全底座，到四层空间的民生布局，北京正在书写立体城市的全新范本。</div>
+    </div>
+
+    <div class="card fade-in">
+      <h3>🌟 你最期待的改变是什么？</h3>
+      <p>🅿️ 停车更方便 · 🛍️ 地下商业更丰富 · 🌳 地面绿化更多 · 🛡️ 城市更安全</p>
+      <p style="margin-top:8px;color:var(--blue-light);font-size:12px">每一份关注，都是推动城市进步的力量。</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="source">* 数据来源：《北京市地下空间专项规划（2025-2035年）》</div>
+    <div class="brand">BEIJING · 2035 · 立体城市</div>
+  </footer>
+
+</div>
+
+<script>
+/* ===== Scroll Animation ===== */
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(function(el){observer.observe(el)});
+
+/* ===== Nav Pills Active State ===== */
+var sections = document.querySelectorAll('section[id]');
+var pills = document.querySelectorAll('.nav-pills a');
+var navObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id = e.target.id;
+      pills.forEach(function(p){
+        p.classList.toggle('active', p.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+},{threshold:0.3,rootMargin:'-20% 0px -50% 0px'});
+sections.forEach(function(s){navObserver.observe(s)});
+
+/* ===== Back to Top ===== */
+var backTop = document.getElementById('backTop');
+window.addEventListener('scroll',function(){
+  backTop.classList.toggle('show', window.scrollY > window.innerHeight);
+},{passive:true});
+
+/* ===== Smooth scroll for nav pills ===== */
+pills.forEach(function(p){
+  p.addEventListener('click',function(e){
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
+</body>
+</html>
